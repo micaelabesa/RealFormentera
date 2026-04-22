@@ -25,6 +25,7 @@ const WHATSAPP_LINK =
 const EMAIL_LINK = "mailto:realformenteradreamestate@gmail.com";
 const NAV_LINKS = [
   ["#servicios", "Servicios"],
+  ["#medios", "Medios"],
   ["#sobre-mi", "Sobre Mi"],
   ["#contacto", "Contacto"],
 ] as const;
@@ -75,6 +76,21 @@ const SERVICES = [
       "Gestión de reservas",
     ],
   },
+  {
+    emoji: "💒",
+    accent: "#D94B8A",
+    bg: "#F8EDF5",
+    sub: "CELEBRACIONES ÚNICAS EN PARAÍSO",
+    title: "Eventos",
+    desc: "Bodas, aniversarios y celebraciones privadas en el escenario más hermoso del Mediterráneo.",
+    items: [
+      "Coordinación integral de bodas",
+      "Aniversarios y celebraciones",
+      "Fiestas privadas VIP",
+      "Red de proveedores premium",
+      "Logística completa en Formentera & Ibiza",
+    ],
+  },
 ];
 
 const CREDENTIALS = [
@@ -85,11 +101,25 @@ const CREDENTIALS = [
   "Diplomada Operador Turístico",
 ];
 
+const GALLERY_IMAGES = [
+  "/images_galery/1000147075.jpg",
+  "/images_galery/1000147096.jpg",
+  "/images_galery/1000147097.jpg",
+  "/images_galery/1000147100.jpg",
+  "/images_galery/1000147102.jpg",
+  "/images_galery/1000147103.jpg",
+  "/images_galery/1000147104.jpg",
+];
+
 /* ─── Component ──────────────────────────────────────────────────────────── */
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const navRef = useRef<HTMLElement | null>(null);
+  const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -135,6 +165,41 @@ export default function Home() {
       document.removeEventListener("keydown", onKeyDown);
     };
   }, [mobileNavOpen]);
+
+  useEffect(() => {
+    const startAutoplay = () => {
+      autoplayTimerRef.current = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % GALLERY_IMAGES.length);
+      }, 6000);
+    };
+
+    startAutoplay();
+    return () => {
+      if (autoplayTimerRef.current) {
+        clearInterval(autoplayTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length);
+    if (autoplayTimerRef.current) {
+      clearInterval(autoplayTimerRef.current);
+      autoplayTimerRef.current = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % GALLERY_IMAGES.length);
+      }, 6000);
+    }
+  };
+
+  const handleNextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % GALLERY_IMAGES.length);
+    if (autoplayTimerRef.current) {
+      clearInterval(autoplayTimerRef.current);
+      autoplayTimerRef.current = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % GALLERY_IMAGES.length);
+      }, 6000);
+    }
+  };
 
   return (
     <main
@@ -282,7 +347,11 @@ export default function Home() {
         .ig-link:hover { color: #1B5FA0 !important; }
 
         /* Responsive breakpoints */
+        @media (max-width: 1300px) {
+          .svc-grid { grid-template-columns: repeat(3, 1fr) !important; }
+        }
         @media (max-width: 900px) {
+          .svc-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .hero-grid    { grid-template-columns: 1fr !important; }
           .hero-photo   { display: none !important; }
           .hero-copy    { text-align: center; }
@@ -923,7 +992,7 @@ export default function Home() {
             className="svc-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
+              gridTemplateColumns: "repeat(4, 1fr)",
               gap: "1.75rem",
             }}
           >
@@ -1073,6 +1142,671 @@ export default function Home() {
         </svg>
       </div>
 
+      {/* ════════════════════════════════════════ COMUNICACIÓN & MEDIOS ═══════ */}
+      <section
+        id="medios"
+        style={{ backgroundColor: "#150D4A", padding: "6rem 2rem" }}
+      >
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          {/* Heading */}
+          <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+            <p
+              style={{
+                color: "#00C9DC",
+                letterSpacing: "0.32em",
+                fontSize: "0.65rem",
+                fontFamily: "var(--font-raleway)",
+                fontWeight: 600,
+                marginBottom: "1rem",
+              }}
+            >
+              CONEXIÓN Y AUTORIDAD
+            </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-cormorant)",
+                fontSize: "clamp(2.2rem, 4vw, 3.2rem)",
+                fontWeight: 300,
+                color: "white",
+                lineHeight: 1.12,
+                margin: 0,
+                marginBottom: "1rem",
+              }}
+            >
+              Comunicación{" "}
+              <span
+                style={{
+                  fontStyle: "italic",
+                  fontWeight: 700,
+                  color: "#00C9DC",
+                }}
+              >
+               y Medios
+              </span>
+            </h2>
+            <p
+              style={{
+                color: "rgba(255,255,255,0.72)",
+                fontSize: "0.95rem",
+                lineHeight: 1.88,
+                fontFamily: "var(--font-raleway)",
+                fontWeight: 300,
+                maxWidth: 600,
+                margin: "1.5rem auto 0",
+              }}
+            >
+              Con más de 25 años en la isla, he consolidado una presencia sólida en los principales medios de comunicación de Baleares, amplificando la voz de Formentera desde plataformas locales.
+            </p>
+          </div>
+
+          {/* Media Partners Grid */}
+<div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, 160px)",
+              gap: "4rem",
+              alignItems: "start",
+              justifyContent: "center",
+              maxWidth: 1200,
+              margin: "3rem auto 0",
+            }}
+          >
+            {[
+              {
+                name: "Prensa Pitiusa",
+                desc: "Periódico de Ibiza & Formentera Radio",
+                logoSrc: "/media/logo_radio.png",
+                logoAlt: "Logo Grupo Prensa Pitiusa",
+              },
+              {
+                name: "Global Radio",
+                desc: "Radiodifusión Nacional",
+                logoSrc: "",
+                logoAlt: "Logo Global Radio",
+              },
+              {
+                name: "Global Classic",
+                desc: "Música & Podcast",
+                logoSrc: "",
+                logoAlt: "Logo Global Classic",
+              },
+              {
+                name: "Revista N&D Mag",
+                desc: "Publicación Premium",
+                logoSrc: "",
+                logoAlt: "Logo Revista N&D Mag",
+              },
+              {
+                name: "Ibiza-eivissa.tv",
+                desc: "Televisión Digital",
+                logoSrc: "",
+                logoAlt: "Logo Ibiza-eivissa.tv",
+              },
+            ].map((media, i) => (
+              <div
+                key={i}
+                style={{
+                  // ✅ Todas las cards con el mismo ancho y alto fijo
+                  width: 160,
+                  height: 180,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "1.5rem 1rem",
+                  borderRadius: 16,
+                  border: "2px solid #E6F7FA",
+                  backgroundColor: "rgba(10, 157, 191, 0.04)",
+                  textAlign: "center",
+                  transition: "all 0.3s ease",
+                  cursor: "pointer",
+                  boxSizing: "border-box",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = "#0A9DBF";
+                  el.style.backgroundColor = "rgba(10, 157, 191, 0.08)";
+                  el.style.transform = "translateY(-4px)";
+                  el.style.boxShadow = "0 12px 36px rgba(10, 157, 191, 0.15)";
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = "#E6F7FA";
+                  el.style.backgroundColor = "rgba(10, 157, 191, 0.04)";
+                  el.style.transform = "translateY(0)";
+                  el.style.boxShadow = "none";
+                }}
+              >
+                {/* ✅ Contenedor de imagen — fijo 72x72, listo para logo */}
+                <div
+                  style={{
+                    width: 72,
+                    height: 72,
+                    borderRadius: 12,
+                    backgroundColor: "#E6F7FA",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: "0.9rem",
+                    overflow: "hidden",
+                    flexShrink: 0,
+                    position: "relative",
+                  }}
+                >
+                  {media.logoSrc ? (
+                    // Cuando logoSrc tenga valor, muestra el logo real
+                    <Image
+                      src={media.logoSrc}
+                      alt={media.logoAlt}
+                      fill
+                      style={{ objectFit: "contain", padding: "8px" }}
+                      sizes="72px"
+                    />
+                  ) : (
+                    // Placeholder hasta que lleguen los logos
+                    <span
+                      style={{
+                        fontSize: "1.6rem",
+                        opacity: 0.35,
+                        userSelect: "none",
+                      }}
+                    >
+                      📡
+                    </span>
+                  )}
+                </div>
+ 
+                <h4
+                  style={{
+                    fontFamily: "var(--font-cormorant)",
+                    fontSize: "1rem",
+                    fontWeight: 600,
+                    color: "#1B5FA0",
+                    margin: "0 0 0.3rem",
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {media.name}
+                </h4>
+                <p
+                  style={{
+                    fontSize: "0.65rem",
+                    color: "#999",
+                    fontFamily: "var(--font-raleway)",
+                    margin: 0,
+                    letterSpacing: "0.07em",
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {media.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div style={{ textAlign: "center", marginTop: "3.5rem" }}>
+            <p
+              style={{
+                color: "#00BDD1",
+                fontSize: "0.78rem",
+                letterSpacing: "0.15em",
+                fontFamily: "var(--font-raleway)",
+                fontWeight: 600,
+                marginBottom: "1.25rem",
+              }}
+            >
+              ¿COLABORACIONES CON MEDIOS?
+            </p>
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+              style={{
+                backgroundColor: "rgba(10, 157, 191, 0.12)",
+                color: "#0A9DBF",
+                padding: "0.9rem 2rem",
+                borderRadius: 100,
+                fontSize: "0.74rem",
+                letterSpacing: "0.18em",
+                fontFamily: "var(--font-raleway)",
+                fontWeight: 700,
+                border: "2px solid #0A9DBF",
+                display: "inline-block",
+              }}
+            >
+              SOLICITA MÁS INFORMACIÓN
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Wave → light section */}
+      <div style={{ backgroundColor: "#150D4A" }}>
+        <svg
+          viewBox="0 0 1440 80"
+          fill="#FEFBF4"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ display: "block", width: "100%" }}
+        >
+          <path d="M0,32 C360,80 1080,0 1440,46 L1440,80 L0,80 Z" />
+        </svg>
+      </div>
+
+      {/* ════════════════════════════════════════ GALERÍA DE FOTOS ═════════ */}
+      <section
+        style={{ backgroundColor: "#FEFBF4", padding: "8rem 2rem" }}
+      >
+        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+          {/* Heading */}
+          <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+            <p
+              style={{
+                color: "#00BDD1",
+                letterSpacing: "0.32em",
+                fontSize: "0.65rem",
+                fontFamily: "var(--font-raleway)",
+                fontWeight: 600,
+                marginBottom: "1rem",
+              }}
+            >
+              A LO LARGO DE LOS AÑOS
+            </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-cormorant)",
+                fontSize: "clamp(2.2rem, 4vw, 3.2rem)",
+                fontWeight: 300,
+                color: "#150D4A",
+                lineHeight: 1.12,
+                margin: 0,
+              }}
+            >
+              Momentos históricos en
+              <br />
+              <span
+                style={{
+                  fontStyle: "italic",
+                  fontWeight: 700,
+                  color: "#1B5FA0",
+                }}
+              >
+                Formentera
+              </span>
+            </h2>
+          </div>
+
+          {/* Carousel Container */}
+          <div
+            style={{
+              position: "relative",
+              borderRadius: 24,
+              overflow: "hidden",
+              backgroundColor: "rgba(0,201,220,0.08)",
+              border: "2px solid rgba(0,201,220,0.15)",
+              aspectRatio: "16 / 10",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {/* Image */}
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <Image
+                src={GALLERY_IMAGES[currentImageIndex]}
+                alt={`Rosita Formentera ${currentImageIndex + 1}`}
+                fill
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  transition: "opacity 0.6s ease",
+                }}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1000px"
+              />
+
+              {/* Zoom Button */}
+              <button
+                onClick={() => {
+                  setSelectedImageIndex(currentImageIndex);
+                  setShowImageModal(true);
+                }}
+                style={{
+                  position: "absolute",
+                  bottom: "1.5rem",
+                  right: "1.5rem",
+                  backgroundColor: "rgba(0,201,220,0.95)",
+                  color: "#150D4A",
+                  border: "none",
+                  padding: "0.75rem 1.25rem",
+                  borderRadius: 100,
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  fontFamily: "var(--font-raleway)",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                  backdropFilter: "blur(12px)",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.transform = "scale(1.08)";
+                  (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#00BDD1";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)";
+                  (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(0,201,220,0.95)";
+                }}
+              >
+                🔍 AMPLIAR
+              </button>
+            </div>
+
+            {/* Previous Button */}
+            <button
+              onClick={handlePrevImage}
+              style={{
+                position: "absolute",
+                left: "1.5rem",
+                top: "50%",
+                transform: "translateY(-50%)",
+                backgroundColor: "rgba(0,201,220,0.9)",
+                color: "#150D4A",
+                border: "none",
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "1.25rem",
+                transition: "all 0.2s ease",
+                zIndex: 10,
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#00BDD1";
+                (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-50%) scale(1.12)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(0,201,220,0.9)";
+                (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-50%) scale(1)";
+              }}
+            >
+              ←
+            </button>
+
+            {/* Next Button */}
+            <button
+              onClick={handleNextImage}
+              style={{
+                position: "absolute",
+                right: "1.5rem",
+                top: "50%",
+                transform: "translateY(-50%)",
+                backgroundColor: "rgba(0,201,220,0.9)",
+                color: "#150D4A",
+                border: "none",
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "1.25rem",
+                transition: "all 0.2s ease",
+                zIndex: 10,
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#00BDD1";
+                (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-50%) scale(1.12)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(0,201,220,0.9)";
+                (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-50%) scale(1)";
+              }}
+            >
+              →
+            </button>
+
+            {/* Dots indicator */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: "1.5rem",
+                left: "50%",
+                transform: "translateX(-50%)",
+                display: "flex",
+                gap: "0.6rem",
+                zIndex: 10,
+              }}
+            >
+              {GALLERY_IMAGES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentImageIndex(i)}
+                  style={{
+                    width: i === currentImageIndex ? 10 : 8,
+                    height: 8,
+                    borderRadius: "50%",
+                    backgroundColor: i === currentImageIndex ? "#00C9DC" : "rgba(0,201,220,0.4)",
+                    border: "none",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.width = "10px";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (i !== currentImageIndex) {
+                      (e.currentTarget as HTMLButtonElement).style.width = "8px";
+                    }
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Image counter */}
+          <div style={{ textAlign: "center", marginTop: "2rem" }}>
+            <p
+              style={{
+                color: "rgba(255,255,255,0.6)",
+                fontSize: "0.85rem",
+                fontFamily: "var(--font-raleway)",
+                margin: 0,
+                letterSpacing: "0.08em",
+              }}
+            >
+              {currentImageIndex + 1} / {GALLERY_IMAGES.length}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Wave → dark section */}
+      <div style={{ backgroundColor: "#FEFBF4" }}>
+        <svg
+          viewBox="0 0 1440 80"
+          fill="#150D4A"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ display: "block", width: "100%" }}
+        >
+          <path d="M0,0 C480,80 960,0 1440,55 L1440,80 L0,80 Z" />
+        </svg>
+      </div>
+
+      {/* Modal para ampliar imagen */}
+      {showImageModal && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0,0,0,0.92)",
+            zIndex: 200,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "2rem",
+          }}
+          onClick={() => setShowImageModal(false)}
+        >
+          <div
+            style={{
+              position: "relative",
+              maxWidth: "90vw",
+              maxHeight: "90vh",
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setShowImageModal(false)}
+              style={{
+                position: "absolute",
+                top: "-2.5rem",
+                right: 0,
+                backgroundColor: "transparent",
+                color: "white",
+                border: "none",
+                fontSize: "2rem",
+                cursor: "pointer",
+                width: 50,
+                height: 50,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              ✕
+            </button>
+
+            {/* Image Container */}
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <Image
+                src={GALLERY_IMAGES[selectedImageIndex]}
+                alt={`Rosita Formentera ${selectedImageIndex + 1}`}
+                fill
+                style={{
+                  objectFit: "contain",
+                }}
+                sizes="90vw"
+              />
+            </div>
+
+            {/* Previous Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImageIndex((prev) => (prev - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length);
+              }}
+              style={{
+                position: "absolute",
+                left: 0,
+                top: "50%",
+                transform: "translateY(-50%)",
+                backgroundColor: "rgba(0,201,220,0.9)",
+                color: "#150D4A",
+                border: "none",
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "1.25rem",
+                transition: "all 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#00BDD1";
+                (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-50%) scale(1.12)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(0,201,220,0.9)";
+                (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-50%) scale(1)";
+              }}
+            >
+              ←
+            </button>
+
+            {/* Next Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImageIndex((prev) => (prev + 1) % GALLERY_IMAGES.length);
+              }}
+              style={{
+                position: "absolute",
+                right: 0,
+                top: "50%",
+                transform: "translateY(-50%)",
+                backgroundColor: "rgba(0,201,220,0.9)",
+                color: "#150D4A",
+                border: "none",
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "1.25rem",
+                transition: "all 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#00BDD1";
+                (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-50%) scale(1.12)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.backgroundColor = "rgba(0,201,220,0.9)";
+                (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-50%) scale(1)";
+              }}
+            >
+              →
+            </button>
+
+            {/* Image counter in modal */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: "2rem",
+                left: "50%",
+                transform: "translateX(-50%)",
+                color: "rgba(255,255,255,0.8)",
+                fontSize: "0.9rem",
+                fontFamily: "var(--font-raleway)",
+                letterSpacing: "0.08em",
+              }}
+            >
+              {selectedImageIndex + 1} / {GALLERY_IMAGES.length}
+            </div>
+          </div>
+        </div>
+      )}
+
+      
+
       {/* ══════════════════════════════════════════════ SOBRE MÍ ═══════ */}
       <section
         className="about-section"
@@ -1199,8 +1933,8 @@ export default function Home() {
               }}
             >
               <p style={{ marginBottom: "1.1rem" }}>
-                Desde niña navegué entre Ibiza y Formentera a bordo del velero
-                de mi padre. En 1999, la isla me invitó a quedarme — y así
+                Hasta los 6 años navegué por el mundo, con base en Ibiza, a bordo del velero
+                de mi padre. Y así en cada verano fui descubriendo las islas. Pero... en 1999, la isla me invitó a quedarme — y así
                 empezó todo: vendiendo fotografías en blanco y negro cuando aún
                 no existían los móviles.
               </p>
@@ -1208,15 +1942,15 @@ export default function Home() {
                 Con los años, mi pasión se multiplicó: guía turística,
                 socorrista, publicista en revistas impresas (cuando Instagram no
                 existía), promotora de apartamentos de lujo para famosos y
-                futbolistas... siempre entre las dos islas.
+                futbolistas... haciendoles sentir en casa.
               </p>
               <p>
-                Me di cuenta de que siempre vendía lo mismo:{" "}
+                Me di cuenta de que siempre ofrecía lo mismo:{" "}
                 <span style={{ color: "#00C9DC", fontStyle: "italic" }}>
                   felicidad.
                 </span>{" "}
                 Hoy combino todo ese conocimiento para crear experiencias únicas.
-                Tengo las llaves de ambas islas — y me encanta abrirte sus
+                Tengo las llaves de ambas islas — y me encantaría abrirte sus
                 puertas.
               </p>
             </div>
