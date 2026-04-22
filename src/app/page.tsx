@@ -1432,7 +1432,7 @@ export default function Home() {
                   color: "#1B5FA0",
                 }}
               >
-                Formentera
+                Formentera e Ibiza
               </span>
             </h2>
           </div>
