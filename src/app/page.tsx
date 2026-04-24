@@ -1219,29 +1219,18 @@ export default function Home() {
                 logoAlt: "Logo Grupo Prensa Pitiusa",
               },
               {
-                name: "Global Radio",
+                name: "Global Radio & Global Classic",
                 desc: "Radiodifusión Nacional",
-                logoSrc: "",
+                logoSrc: "/media/logo_global.jpg",
                 logoAlt: "Logo Global Radio",
               },
               {
-                name: "Global Classic",
-                desc: "Música & Podcast",
-                logoSrc: "",
-                logoAlt: "Logo Global Classic",
-              },
-              {
                 name: "Revista N&D Mag",
-                desc: "Publicación Premium",
-                logoSrc: "",
+                desc: "Ibiza-eivissa.tv",
+                logoSrc: "/media/logo_nd.jpg",
                 logoAlt: "Logo Revista N&D Mag",
               },
-              {
-                name: "Ibiza-eivissa.tv",
-                desc: "Televisión Digital",
-                logoSrc: "",
-                logoAlt: "Logo Ibiza-eivissa.tv",
-              },
+              
             ].map((media, i) => (
               <div
                 key={i}
@@ -1435,6 +1424,19 @@ export default function Home() {
                 Formentera e Ibiza
               </span>
             </h2>
+
+            <p
+              style={{
+                color: "#00BDD1",
+                letterSpacing: "0.32em",
+                fontSize: "0.65rem",
+                fontFamily: "var(--font-raleway)",
+                fontWeight: 600,
+                marginBottom: "1rem",
+              }}
+            >
+              BY ROSITA CLERICI.
+            </p>
           </div>
 
           {/* Carousel Container */}
