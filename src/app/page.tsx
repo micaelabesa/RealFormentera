@@ -32,7 +32,7 @@ const NAV_LINKS = [
 
 const SERVICES = [
   {
-    emoji: "🎯",
+    faIcon: "fa-solid fa-list-check",
     accent: "#6B4EA6",
     bg: "#EEE9F7",
     sub: "TU VIAJE, PERFECTAMENTE ORGANIZADO",
@@ -47,7 +47,7 @@ const SERVICES = [
     ],
   },
   {
-    emoji: "🌊",
+    faIcon: "fa-solid fa-umbrella-beach",
     accent: "#0A9DBF",
     bg: "#E6F7FA",
     sub: "EL MAR COMO PROTAGONISTA",
@@ -62,7 +62,7 @@ const SERVICES = [
     ],
   },
   {
-    emoji: "🏡",
+    faIcon: "fa-solid fa-house",
     accent: "#1B5FA0",
     bg: "#EBF2FB",
     sub: "TU HOGAR EN EL MEDITERRÁNEO",
@@ -77,7 +77,7 @@ const SERVICES = [
     ],
   },
   {
-    emoji: "💒",
+    faIcon: "fa-solid fa-champagne-glasses",
     accent: "#D94B8A",
     bg: "#F8EDF5",
     sub: "CELEBRACIONES ÚNICAS EN PARAÍSO",
@@ -1018,11 +1018,27 @@ export default function Home() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: "1.75rem",
                     marginBottom: "1.6rem",
+                    overflow: "hidden",
                   }}
                 >
-                  {s.emoji}
+                  <i
+                    className={s.faIcon}
+                    style={{
+                      fontSize: "1.75rem",
+                      color: s.accent,
+                      lineHeight: 1,
+                      margin: 0,
+                      padding: 0,
+                      height: "1.75rem",
+                      width: "1.75rem",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
+                    aria-hidden="true"
+                  />
                 </div>
 
                 <p
@@ -1215,12 +1231,12 @@ export default function Home() {
               {
                 name: "Prensa Pitiusa",
                 desc: "Periódico de Ibiza & Formentera Radio",
-                logoSrc: "/media/logo_radio.png",
+                logoSrc: "/media/logo_radio.jpg",
                 logoAlt: "Logo Grupo Prensa Pitiusa",
               },
               {
                 name: "Global Radio & Global Classic",
-                desc: "Radiodifusión Nacional",
+                desc: "Radiodifusión Internacional",
                 logoSrc: "/media/logo_global.jpg",
                 logoAlt: "Logo Global Radio",
               },
